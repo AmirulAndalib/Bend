@@ -31,6 +31,10 @@ impl Imports {
     Ok(())
   }
 
+  pub fn imports(&self) -> &[(Name, Vec<Name>)] {
+    &self.names
+  }
+
   pub fn load_imports(&mut self, loader: &mut impl PackageLoader) -> Result<(), String> {
     for (src, sub_imports) in &self.names {
       let packages = loader.load_multiple(src.clone(), sub_imports)?;
